@@ -493,7 +493,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Marek",
         nameLast: "Arsenault",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -549,7 +549,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Taha",
         nameLast: "Skiredj",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -1054,7 +1054,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Ding Wen",
         nameLast: "Li",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -1082,7 +1082,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Antony",
         nameLast: "Leclerc",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -1117,7 +1117,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Étienne",
         nameLast: "Bouchard",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -1145,7 +1145,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Félix",
         nameLast: "Beaudoin",
         rank: "Master's Student · DIRO, Université de Montréal",
@@ -1176,7 +1176,7 @@ window.PEOPLE_DATA = {
       formerStudents: [],
       teaching: [],
       en: {
-        eyebrow: "Master's Students",
+        eyebrow: "Master's Student",
         nameFirst: "Jean-Claude",
         nameLast: "Desrosiers",
         rank: "Master's Student · DIRO, Université de Montréal",
