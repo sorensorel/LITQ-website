@@ -271,7 +271,9 @@ window.PEOPLE_DATA = {
             url: "https://www.iro.umontreal.ca/~dupuisf/",
           },
         ],
-        bio: [],
+        bio: [
+          "Frédéric Dupuis est professeur agrégé au Département d'informatique et de recherche opérationnelle de l'Université de Montréal. Il s'intéresse particulièrement à la théorie de l'information quantique et à la cryptographie quantique.",
+        ],
         researchInterests: [
           "Théorie de Shannon quantique et capacités des canaux",
           "Mesures d'entropie à un coup et d'entropie lisse dans les systèmes quantiques",

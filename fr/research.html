@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LITQ — Version française à venir</title>
+  <title>Recherche — LITQ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,29 +12,115 @@
 </head>
 <body>
 
+<!-- ══════════ NAV ══════════ -->
 <nav id="nav" class="always-solid">
-  <a href="../en/index.html" class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <span class="nav-logo-name">LITQ</span>
     <span class="nav-logo-sub">Université de Montréal</span>
   </a>
-  <a href="../en/research.html" class="lang-toggle" style="margin-left:auto;">EN</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="research.html" class="active">Recherche</a></li>
+    <li><a href="people.html">Équipe</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="positions.html">Rejoindre</a></li>
+  </ul>
+  <a href="../en/research.html" class="lang-toggle">EN</a>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;z-index:1;">
-  <div style="text-align:center;max-width:520px;">
-    <div style="font-family:var(--ff-mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:1.5rem;">LITQ · Université de Montréal</div>
-    <h1 style="font-family:var(--ff-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--text);letter-spacing:-0.02em;line-height:1.2;margin-bottom:1.25rem;">
-      Version française<br><em style="color:var(--teal);">à venir</em>
-    </h1>
-    <p style="font-family:var(--ff-body);font-size:1rem;color:var(--text-muted);line-height:1.7;margin-bottom:2.5rem;">
-      La version française du site est en cours de préparation.<br>
-      Merci de votre patience.
-    </p>
-    <a href="../en/research.html" style="font-family:var(--ff-mono);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1.5px solid var(--accent);padding:0.65rem 1.6rem;display:inline-block;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">
-      Vers la version anglaise
-    </a>
+<!-- ══════════ EN-TÊTE DE PAGE ══════════ -->
+<header class="page-header">
+  <div class="page-header-mesh" aria-hidden="true">
+    <!-- purple5 : deux ovales hauts — grands, à droite, débordant derrière le premier thème -->
+    <img src="../brand_assets/tilde-ellipse-green5.png" alt=""
+         style="width: 65vw; max-width: 860px; min-width: 600px;; right: -10%; top: -20%; opacity: 0.20;" />
   </div>
+  <div class="page-header-inner">
+    <div class="page-header-eyebrow">LITQ · Recherche</div>
+    <h1 style="font-size:clamp(2.2rem, 4.5vw, 3.8rem);">Thèmes de <em>Recherche</em></h1>
+  </div>
+  <div class="page-header-deco">⟩⟨</div>
+</header>
+
+<!-- ══════════ DOMAINES DE RECHERCHE ══════════ -->
+<main style="max-width:900px; margin:0 auto; padding:5rem 5vw 8rem;">
+  <div id="research-list"></div>
+  <p style="font-family:var(--ff-mono); font-size:0.78rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--text-subtle); text-align:center; margin-top:5rem;">Plus d'informations à venir</p>
+</main>
+
+<!-- ══════════ PIED DE PAGE ══════════ -->
+<footer>
+  <div>
+    <div class="footer-logo">LITQ</div>
+    <p class="footer-desc">Laboratoire d'informatique théorique et quantique</p>
+    <div class="footer-affil"><div class="footer-affil-dot"></div><span><a href="https://diro.umontreal.ca/accueil/" target="_blank" rel="noopener">DIRO</a> — Université de Montréal</span></div>
+    <div class="footer-affil"><div class="footer-affil-dot"></div><span>Membre de <a href="https://www.intriq.org" target="_blank" rel="noopener">INTRIQ</a>, <a href="https://quorumuottawa.ca" target="_blank" rel="noopener">QUORUM</a> et <a href="https://ivado.ca/" target="_blank" rel="noopener">IVADO</a></span></div>
+  </div>
+  <div class="footer-contact">
+    <h4>Nous contacter</h4>
+    <p style="margin-top:0; font-size:0.95rem; line-height:1.7; color:var(--text-muted);">
+      <span style="white-space:nowrap;">Département d'Informatique et de</span><br><span style="white-space:nowrap;">Recherche Opérationnelle (DIRO)</span><br>
+      Université de Montréal<br>
+      Pavillon André-Aisenstadt<br>
+      2920, chemin de la Tour<br>
+      Montréal (Québec) H3T 1J4
+    </p>
+  </div>
+  <div class="footer-map">
+    <img src="../images/LITQ.jpg" alt="Carte du campus LITQ — Université de Montréal, Campus MIL" />
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 LITQ — Université de Montréal. Tous droits réservés.</p>
+  <p>Département d'Informatique et de Recherche Opérationnelle</p>
+  <p>Site conçu par Daniel Bilsborrow</p>
 </div>
 
+<script src="../people.js?v=4"></script>
+<script>
+(function () {
+  var lang = 'fr';
+  var list = document.getElementById('research-list');
+
+  // Construire la correspondance thème → personnes
+  var topicMap = {};
+  window.PEOPLE_DATA.people.forEach(function (person) {
+    var d = person[lang];
+    if (!d || !d.researchAreaTags || d.researchAreaTags.length === 0) return;
+    d.researchAreaTags.forEach(function (topic) {
+      if (!topicMap[topic]) topicMap[topic] = [];
+      topicMap[topic].push({ name: d.nameFirst + ' ' + d.nameLast, role: d.eyebrow });
+    });
+  });
+
+  var topics = Object.keys(topicMap).sort(function (a, b) { return a.localeCompare(b); });
+
+  topics.forEach(function (topic, i) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:flex-start;gap:2.5rem;padding:2.25rem 0;border-bottom:1px solid rgba(88,28,135,0.13);' + (i === 0 ? 'border-top:1px solid rgba(88,28,135,0.13);' : '');
+
+    var topicEl = document.createElement('div');
+    topicEl.style.cssText = 'flex:1;';
+    topicEl.innerHTML = '<span style="font-family:var(--ff-display);font-size:1.12rem;font-weight:300;color:var(--text);">' + topic + '</span>';
+
+    var peopleEl = document.createElement('div');
+    peopleEl.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.45rem;min-width:0;justify-content:flex-end;';
+    topicMap[topic].forEach(function (person) {
+      var chip = document.createElement('span');
+      chip.style.cssText = 'font-family:var(--ff-mono);font-size:0.70rem;letter-spacing:0.06em;padding:0.32rem 0.8rem;border:1px solid rgba(88,28,135,0.2);border-radius:100px;color:var(--accent);background:rgba(27,58,140,0.05);white-space:nowrap;';
+      chip.textContent = person.name;
+      peopleEl.appendChild(chip);
+    });
+
+    row.appendChild(topicEl);
+    row.appendChild(peopleEl);
+    list.appendChild(row);
+  });
+})();
+</script>
+<script src="../script.js?v=4" defer></script>
 </body>
 </html>

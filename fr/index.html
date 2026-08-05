@@ -3,36 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LITQ — Version française à venir</title>
+  <title>LITQ — Laboratoire d'informatique théorique et quantique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=4">
+  <style>
+    .team-card--more .team-photo-more { aspect-ratio: 1/1; background: var(--surface); border: 1.5px dashed var(--border-teal); display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 0.7rem; transition: background 0.3s, border-color 0.25s; gap: 0.4rem; }
+    .team-card--more:hover .team-photo-more { background: var(--teal-dim); border-color: var(--teal); border-style: solid; }
+    .team-card-more-count { font-family: var(--ff-display); font-size: 2.1rem; font-weight: 300; color: var(--teal); line-height: 1; }
+    .team-card-more-label { font-family: var(--ff-mono); font-size: 0.60rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-subtle); text-align: center; padding: 0 0.6rem; }
+    .team-card--more .team-name { color: var(--teal) !important; }
+  </style>
 </head>
 <body>
 
-<nav id="nav" class="always-solid">
-  <a href="../en/index.html" class="nav-logo">
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">
     <span class="nav-logo-name">LITQ</span>
     <span class="nav-logo-sub">Université de Montréal</span>
   </a>
-  <a href="../en/index.html" class="lang-toggle" style="margin-left:auto;">EN</a>
+  <ul class="nav-links">
+    <li><a href="#home">Accueil</a></li>
+    <li><a href="research.html">Recherche</a></li>
+    <li><a href="people.html">Équipe</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="positions.html">Rejoindre</a></li>
+  </ul>
+  <a href="../en/index.html" class="lang-toggle">EN</a>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;z-index:1;">
-  <div style="text-align:center;max-width:520px;">
-    <div style="font-family:var(--ff-mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:1.5rem;">LITQ · Université de Montréal</div>
-    <h1 style="font-family:var(--ff-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--text);letter-spacing:-0.02em;line-height:1.2;margin-bottom:1.25rem;">
-      Version française<br><em style="color:var(--teal);">à venir</em>
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <!-- Canevas d'arrière-plan : paquet d'ondes gaussien -->
+  <canvas id="wave-canvas"></canvas>
+  <!-- Dégradé de superposition : dégagé à gauche pour le texte, transparent à droite pour les ondes -->
+  <div class="hero-wave-overlay"></div>
+
+  <div class="hero-inner">
+    <div class="hero-tag">Quantique · Théorie · Calcul</div>
+    <h1 class="hero-h1">
+      <span class="hero-line"><span class="hero-line-inner">Laboratoire</span></span>
+      <span class="hero-line"><span class="hero-line-inner">d'<em class="hero-italic">informatique</em></span></span>
+      <span class="hero-line"><span class="hero-line-inner">théorique et quantique</span></span>
     </h1>
-    <p style="font-family:var(--ff-body);font-size:1rem;color:var(--text-muted);line-height:1.7;margin-bottom:2.5rem;">
-      La version française du site est en cours de préparation.<br>
-      Merci de votre patience.
+    <p class="hero-body">
+      Nous étudions les fondements mathématiques de l'informatique, de l'information et du calcul quantiques à la complexité classique et à la théorie des graphes. Basé au DIRO, Université de Montréal.
     </p>
-    <a href="../en/index.html" style="font-family:var(--ff-mono);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1.5px solid var(--accent);padding:0.65rem 1.6rem;display:inline-block;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--accent)'">
-      Vers la version anglaise
-    </a>
   </div>
+</section>
+
+<!-- ══════════ À PROPOS ══════════ -->
+<section class="section" id="about" style="padding-bottom:4.5rem;">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="sec-eyebrow reveal">À propos du LITQ</div>
+      <h2 class="sec-title reveal">Qui nous <em class="teal">sommes</em></h2>
+      <div class="accent-rule reveal"></div>
+      <p class="reveal">
+        Bienvenue sur le site du Laboratoire d'informatique théorique et quantique (LITQ) du Département
+        d'informatique et de recherche opérationnelle (DIRO) de l'Université de Montréal. Notre laboratoire
+        compte sept membres du corps professoral et est très actif tant en recherche qu'en enseignement.
+      </p>
+      <p class="reveal reveal-d1">
+        Nous travaillons sur divers aspects liés aux fondements de l'informatique et de la physique.
+        Nos recherches portent sur l'information et le calcul quantiques, la cryptographie classique et quantique,
+        les fondements de la théorie quantique, la complexité computationnelle et la théorie des graphes.
+      </p>
+      <div class="reveal" style="margin-top:2rem;">
+        <a href="research.html" class="btn-sec">Explorer notre recherche →</a>
+      </div>
+    </div>
+
+    <!-- Photo de groupe -->
+    <div class="about-img-wrap reveal reveal-d1">
+      <img src="../images/quorum-2025-group-photo.jpg" alt="Groupe LITQ au Quorum Ottawa 2025">
+      <p style="font-family:var(--ff-mono); font-size:0.62rem; letter-spacing:0.1em; color:var(--text-subtle); line-height:1.6; margin-top:0.75rem; text-align:center;">Membres du groupe avec des collègues de l'ensemble du Québec &amp; Ontario lors de l'atelier QUORUM 2025 à Ottawa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ÉQUIPE ══════════ -->
+<section class="section" id="people">
+  <div class="section-mesh" aria-hidden="true">
+    <!-- purple2 : fleur/étamine — grande, en haut à droite, verticale -->
+    <img src="../brand_assets/tilde-ellipse-purple4.png" alt=""
+         style="width:95%; max-width:960px; top:-15%; right:-15%;" />
+    <!-- green2 : paire de lobes jumeaux — en bas à gauche -->
+    <img src="../brand_assets/tilde-ellipse-green6.png" alt=""
+         style="width:65%; max-width:640px; bottom:-5%; left:5%; opacity:0.19;" />
+  </div>
+  <div class="sec-eyebrow sec-eyebrow--purple reveal">L'équipe</div>
+  <h2 class="sec-title reveal">Rencontrer nos <em>chercheurs</em></h2>
+  <p class="people-section-title reveal">Corps professoral</p>
+  <div class="team-carousel-wrap reveal">
+    <button class="carousel-btn carousel-btn--prev" aria-label="Précédent">&#8592;</button>
+    <div class="team-carousel-track-outer">
+      <div class="team-grid" id="carousel-faculty"></div>
+    </div>
+    <button class="carousel-btn carousel-btn--next" aria-label="Suivant">&#8594;</button>
+  </div>
+  <div class="reveal" style="text-align:center;margin-top:3rem;">
+    <a href="people.html" class="btn-sec">Voir tous les membres →</a>
+  </div>
+</section>
+
+<!-- ══════════ ACTUALITÉS ══════════ -->
+<section class="section section--alt" id="news">
+  <div class="sec-eyebrow reveal">Quoi de neuf</div>
+  <h2 class="sec-title reveal">Dernières <em>actualités</em></h2>
+  <div style="max-width:780px; margin-top:3rem; display:flex; flex-direction:column; gap:1.5rem;">
+
+    <div class="reveal" style="display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.2rem; border:1px solid var(--border-teal); background:var(--surface);">
+      <div style="flex-shrink:0; font-family:var(--ff-mono); font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); padding-top:0.2rem; min-width:80px;">Mars 2026</div>
+      <p style="font-size:1rem; line-height:1.8; color:var(--text-muted); margin:0;">
+        Notre propre <strong style="color:var(--text); font-weight:500;">Prof. Gilles Brassard</strong> vient de remporter le
+        <a href="https://awards.acm.org/about/2025-turing" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:underline; text-underline-offset:2px;">prix Turing 2025</a>
+        — la plus prestigieuse distinction internationale en informatique —
+        aux côtés de Charles H. Bennett
+        <em>« pour leur rôle essentiel dans l'amorce et l'essor de la révolution quantique en informatique et dans les technologies de l'information et des communications »</em>!
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ PUBLICATIONS ══════════ -->
+<section class="section section--alt" id="publications">
+  <div class="sec-eyebrow reveal">Publications sélectionnées</div>
+  <h2 class="sec-title reveal">Recherches <em>récentes</em></h2>
+  <div class="reveal" id="pub-list"></div>
+  <div class="reveal" style="text-align:center;margin-top:3.5rem;">
+    <a href="publications.html" class="btn-sec">Voir plus de publications →</a>
+  </div>
+</section>
+
+<!-- ══════════ EMPLACEMENT ══════════ -->
+<section class="section section--alt" id="location">
+  <div class="sec-eyebrow reveal">Nous trouver</div>
+  <h2 class="sec-title reveal">Situé à <em class="teal">Montréal</em></h2>
+  <div class="location-grid">
+    <div class="location-cards">
+      <div class="location-card reveal">
+        <div class="location-card-label">Adresse</div>
+        <address>
+          Laboratoire d'informatique théorique et quantique<br>
+          Département d'informatique et<br>
+          de recherche opérationnelle (DIRO)<br>
+          Locaux : 3344 et 3350<br>
+          Pavillon André-Aisenstadt<br>
+          2920 Chemin de la Tour<br>
+          Montréal (Québec) H3T 1J4 &nbsp;Canada
+        </address>
+      </div>
+      <div class="location-card reveal reveal-d1">
+        <div class="location-card-label">Comment s'y rendre</div>
+        <p><strong style="color:var(--text);font-weight:500;">Métro</strong> — Station Université de Montréal (ligne bleue, sortie Chemin de la Tour)</p>
+        <p><strong style="color:var(--text);font-weight:500;">Bâtiment</strong> — Pavillon André-Aisenstadt, le pavillon de mathématiques et d'informatique sur le campus principal de l'UdeM</p>
+        <p><strong style="color:var(--text);font-weight:500;">Stationnement</strong> — Stationnement payant disponible sur le Chemin de la Tour et au stationnement de l'Université de Montréal</p>
+        <div style="margin-top:1rem;">
+          <a href="https://www.stm.info/fr/infos/reseaux/plans-des-reseaux" class="location-pill location-pill--teal" target="_blank" rel="noopener">🚇 Ligne bleue</a>
+          <a href="https://diro.umontreal.ca/accueil/" class="location-pill location-pill--teal" target="_blank" rel="noopener">DIRO</a>
+          <a href="https://maps.app.goo.gl/NFE4Kb53aWZVRdHu5" class="location-pill" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="location-photo-wrap reveal reveal-d1">
+      <img src="../brand_assets/ParcFleursDeMacadam_01carolineperronphotographies.webp"
+           alt="Montréal — Parc des Fleurs de Macadam" loading="lazy">
+      <div class="location-photo-caption">Montréal, Québec · Canada</div>
+    </div>
+  </div>
+  <p class="reveal" style="text-align:center;margin-top:3rem;color:var(--text-muted);">
+    Le LITQ est toujours à la recherche d'étudiant(e)s dynamiques et motivé(e)s à tous les niveaux et accueille chaleureusement les visiteurs.
+  </p>
+  <div class="reveal" style="text-align:center;margin-top:1rem;">
+    <a href="positions.html" class="btn-sec">Intéressé(e) à nous rejoindre ? →</a>
+  </div>
+</section>
+
+<!-- ══════════ PIED DE PAGE ══════════ -->
+<footer>
+  <div>
+    <div class="footer-logo">LITQ</div>
+    <p class="footer-desc">Laboratoire d'informatique théorique et quantique</p>
+    <div class="footer-affil"><div class="footer-affil-dot"></div><span><a href="https://diro.umontreal.ca/accueil/" target="_blank" rel="noopener">DIRO</a> — Université de Montréal</span></div>
+    <div class="footer-affil"><div class="footer-affil-dot"></div><span>Membre de <a href="https://www.intriq.org" target="_blank" rel="noopener">INTRIQ</a>, <a href="https://quorumuottawa.ca" target="_blank" rel="noopener">QUORUM</a> et <a href="https://ivado.ca/" target="_blank" rel="noopener">IVADO</a></span></div>
+  </div>
+  <div class="footer-contact">
+    <h4>Nous contacter</h4>
+    <p style="margin-top:0; font-size:0.95rem; line-height:1.7; color:var(--text-muted);">
+      <span style="white-space:nowrap;">Département d'Informatique et de</span><br><span style="white-space:nowrap;">Recherche Opérationnelle (DIRO)</span><br>
+      Université de Montréal<br>
+      Pavillon André-Aisenstadt<br>
+      2920, chemin de la Tour<br>
+      Montréal (Québec) H3T 1J4
+    </p>
+  </div>
+  <div class="footer-map">
+    <img src="../images/LITQ.jpg" alt="Carte du campus LITQ — Université de Montréal, Campus MIL" />
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 LITQ — Université de Montréal. Tous droits réservés.</p>
+  <p>Département d'Informatique et de Recherche Opérationnelle</p>
+  <p>Site conçu par Daniel Bilsborrow</p>
 </div>
 
 <script src="../people.js?v=4"></script>
@@ -45,7 +226,7 @@
     return arr.slice().sort(function (a, b) {
       var aL = (a.fr || a.en).nameLast;
       var bL = (b.fr || b.en).nameLast;
-      return aL.localeCompare(bL, undefined, { sensitivity: 'base' });
+      return aL.localeCompare(bL, 'fr', { sensitivity: 'base' });
     });
   }
 
@@ -54,8 +235,8 @@
 
   function makeCard(p) {
     var l = p.fr || p.en;
-    var rankShort = l.rank ? l.rank.split('\u00b7')[0].trim() : l.eyebrow;
-    var area = (l.researchAreaTags || []).slice(0, 2).join(' \u00b7 ');
+    var rankShort = l.rank ? l.rank.split('·')[0].trim() : l.eyebrow;
+    var area = (l.researchAreaTags || []).slice(0, 2).join(' · ');
     var photoSrc;
     if (p.photo === null) {
       var initials = l.nameFirst.charAt(0) + '.' + l.nameLast.charAt(0) + '.';
@@ -65,8 +246,12 @@
     } else {
       photoSrc = p.photo.startsWith('http') ? p.photo : '../profile_icons/' + p.photo;
     }
+    var thumbStyle = '';
+    if (p.thumbnailZoom) thumbStyle += '--thumb-zoom:' + p.thumbnailZoom + ';';
+    if (p.thumbnailPosition) thumbStyle += '--thumb-pos:' + p.thumbnailPosition + ';';
+    if (p.thumbnailOrigin) thumbStyle += '--thumb-origin:' + p.thumbnailOrigin + ';';
     return '<a class="team-card" href="profile.html?id=' + p.id + '" style="text-decoration:none;">'
-      + '<div class="team-photo"><img src="' + photoSrc + '" alt="' + l.nameFirst + ' ' + l.nameLast + '" loading="lazy"></div>'
+      + '<div class="team-photo"' + (thumbStyle ? ' style="' + thumbStyle + '"' : '') + '><img src="' + photoSrc + '" alt="' + l.nameFirst + ' ' + l.nameLast + '" loading="lazy"></div>'
       + '<p class="team-name">' + l.nameFirst + ' ' + l.nameLast + '</p>'
       + '<p class="team-role">' + rankShort + '</p>'
       + '<p class="team-area">' + area + '</p>'
@@ -84,123 +269,187 @@
 
 <script src="../script.js?v=4" defer></script>
 
+<!-- ══════════ PUBLICATIONS EN DIRECT — OPENALEX ══════════
+     Interroge l'API gratuite OpenAlex à chaque chargement de page.
+     Remplace la liste statique par les 5 articles les plus récents
+     signés par un membre du corps professoral du LITQ.
+     ══════════════════════════════════════════════════════════════ -->
 <script>
 (async function () {
+
+  /* ── 1. Afficher l'état de chargement ── */
   const pubList = document.getElementById('pub-list');
   if (!pubList) return;
 
   pubList.innerHTML =
     '<div style="text-align:center;padding:2.8rem;font-family:var(--ff-mono);' +
     'font-size:0.68rem;letter-spacing:0.18em;color:var(--text-subtle);text-transform:uppercase;">' +
-    'Chargement des publications\u2026</div>';
+    'Chargement des publications…</div>';
 
+  /* ── 2. Identifiants OpenAlex — un identifiant permanent par professeur.
+     Récupérés une seule fois via https://api.openalex.org/authors?search=NOM
+     et stables dans le temps (contrairement aux recherches par nom). ── */
   const FACULTY = [
-    { id: 'A5110284072', name: 'G. Brassard'    },
-    { id: 'A5066085467', name: 'F. Dupuis'       },
-    { id: 'A5059511887', name: 'L. Salvail'      },
-    { id: 'A5049102572', name: 'H. Kristjánsson' },
-    { id: 'A5110941674', name: 'G. Hahn'         },
-    { id: 'A5017300573', name: 'D. Sokolov'      },
-    { id: 'A5103523901', name: 'M. Boyer'        },
-    { id: 'A5044037051', name: 'P. Lamontagne'   },
+    { id: 'A5110284072', name: 'G. Brassard'    }, // Prof. Gilles Brassard
+    { id: 'A5066085467', name: 'F. Dupuis'       }, // Prof. Frédéric Dupuis
+    { id: 'A5059511887', name: 'L. Salvail'      }, // Prof. Louis Salvail
+    { id: 'A5049102572', name: 'H. Kristjánsson' }, // Prof. Hlér Kristjánsson
+    { id: 'A5110941674', name: 'G. Hahn'         }, // Prof. Gena Hahn
+    { id: 'A5017300573', name: 'D. Sokolov'      }, // Prof. Dmitry Sokolov
+    { id: 'A5103523901', name: 'M. Boyer'        }, // Prof. Michel Boyer
+    { id: 'A5044037051', name: 'P. Lamontagne'   }, // Prof. Philippe Lamontagne
   ];
 
   /* ╔══════════════════════════════════════════════════════════════════╗
      ║ TEMP — ARTICLES MANUELS (pas encore indexés par OpenAlex)         ║
      ║ SUPPRIMER ce bloc MANUAL_PAPERS + la ligne [TEMP-MERGE] plus bas  ║
-     ║ dès que ces articles apparaîtront dans le flux API.               ║
+     ║ dès que ces articles apparaîtront dans le flux de l'API.          ║
      ╚══════════════════════════════════════════════════════════════════╝ */
   const MANUAL_PAPERS = [
-    {
-      title: 'CoALFake: Collaborative Active Learning with Human-LLM Co-Annotation for Cross-Domain Fake News Detection',
-      authorDisplay: 'E. Aïmeur, G. Brassard, D. Sallami',
-      venue: 'arXiv',
-      year: 2026,
-      paperLink: 'https://arxiv.org/abs/2604.04174'
-    },
     {
       title: 'On the power of multipartite entanglement for pseudotelepathy',
       authorDisplay: 'G. Brassard, X. Coiteux-Roy, R. Ligez',
       venue: 'arXiv',
       year: 2026,
       paperLink: 'https://arxiv.org/abs/2603.17956'
+    },
+    {
+      title: 'CoALFake: Collaborative Active Learning with Human-LLM Co-Annotation for Cross-Domain Fake News Detection',
+      authorDisplay: 'E. Aïmeur, G. Brassard, D. Sallami',
+      venue: 'arXiv',
+      year: 2026,
+      paperLink: 'https://arxiv.org/abs/2604.04174'
     }
   ];
-  /* ╚════════════════════ FIN DU BLOC TEMP MANUAL PAPERS ════════════════╝ */
+  /* ╚═════════════════ FIN DU BLOC TEMP ARTICLES MANUELS ════════════════╝ */
 
+  /* ── 3. Utilitaire : échapper le HTML ── */
   function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
   try {
+    /* ── 4. Construire l'URL de l'API ── */
     const authorFilter = FACULTY.map(function (f) { return f.id; }).join('|');
     const fields = 'id,title,publication_year,publication_date,authorships,primary_location,open_access';
-    const url = 'https://api.openalex.org/works'
-      + '?filter=authorships.author.id:' + authorFilter
-      + '&sort=publication_date:desc&per_page=20&select=' + fields
-      + '&mailto=litq@iro.umontreal.ca';
+    const url =
+      'https://api.openalex.org/works' +
+      '?filter=authorships.author.id:' + authorFilter +
+      '&sort=publication_date:desc' +
+      '&per_page=20' +
+      '&select=' + fields +
+      '&mailto=litq@iro.umontreal.ca'; // pool « poli » : limites de débit plus souples
 
+    /* ── 5. Requête — JSON simple ── */
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
 
-    const seen = new Set();
+    /* ── 6. Extraire les détails de chaque article ── */
+    const seen   = new Set();
     const papers = [];
 
     (data.results || []).forEach(function (work) {
       const openAlexId = work.id || '';
       if (!openAlexId || seen.has(openAlexId)) return;
       seen.add(openAlexId);
+
       const title = (work.title || '').trim().replace(/\s+/g, ' ');
       if (!title) return;
+
       const year = work.publication_year || '—';
+      const date = work.publication_date ? new Date(work.publication_date) : new Date(0);
+
+      /* Affichage des auteurs : tous les auteurs abrégés en « P. Nom » */
       const allAuthors = (work.authorships || []).map(function (a) {
         const parts = (a.author && a.author.display_name || '').trim().split(' ');
         if (parts.length < 2) return parts[0] || '';
         return parts[0][0] + '. ' + parts[parts.length - 1];
       }).filter(Boolean);
-      const oa = work.open_access || {};
-      const loc = work.primary_location || {};
-      const arxivUrl = oa.oa_url && oa.oa_url.includes('arxiv.org') ? oa.oa_url : null;
-      const doiUrl = loc.landing_page_url || null;
+      const authorDisplay = allAuthors.join(', ');
+
+      /* Lien : arXiv en priorité, puis DOI, puis OpenAlex */
+      const oa        = work.open_access || {};
+      const loc       = work.primary_location || {};
+      const arxivUrl  = oa.oa_url && oa.oa_url.includes('arxiv.org') ? oa.oa_url : null;
+      const doiUrl    = loc.landing_page_url || null;
       const paperLink = arxivUrl || doiUrl || ('https://openalex.org/' + openAlexId.replace('https://openalex.org/', ''));
-      const source = loc.source;
-      const venue = (source && source.display_name) ? source.display_name : (arxivUrl ? 'arXiv' : '');
-      papers.push({ title, authorDisplay: allAuthors.join(', '), venue, year, paperLink });
+
+      /* Lieu de publication : revue/conférence, ou arXiv, ou vide */
+      const source  = loc.source;
+      const venue   = (source && source.display_name) ? source.display_name
+                    : (arxivUrl ? 'arXiv' : '');
+
+      papers.push({ title, authorDisplay, venue, year, date, paperLink });
     });
 
     if (papers.length === 0) { showError(); return; }
 
-    /* [TEMP-MERGE] Préfixe MANUAL_PAPERS pour les afficher en haut de la
-       liste des publications sélectionnées. Lors de la suppression du bloc
-       manuel ci-dessus, supprimer entièrement la ligne suivante. */
+    /* [TEMP-MERGE] Place MANUAL_PAPERS en tête de la liste des publications
+       sélectionnées. Lors de la suppression du bloc manuel ci-dessus,
+       supprimer entièrement la ligne suivante. */
     papers.unshift.apply(papers, MANUAL_PAPERS);
 
+    /* ── 7. Afficher les 5 premiers avec apparition en cascade ── */
     pubList.innerHTML = papers.slice(0, 5).map(function (p) {
-      return '<div class="pub-item" style="opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.16,1,0.3,1);">'
-        + '<span class="pub-year">' + esc(p.year) + '</span>'
-        + '<div><p class="pub-title">' + esc(p.title) + '</p>'
-        + '<p class="pub-meta">' + esc(p.authorDisplay)
-        + (p.venue ? ' <span class="pub-venue">' + esc(p.venue) + '</span>' : '') + '</p></div>'
-        + '<a href="' + esc(p.paperLink) + '" class="pub-link" target="_blank" rel="noopener">PDF →</a>'
-        + '</div>';
+      return '<div class="pub-item" style="opacity:0;transform:translateY(14px);' +
+             'transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.16,1,0.3,1);">' +
+               '<span class="pub-year">' + esc(p.year) + '</span>' +
+               '<div>' +
+                 '<p class="pub-title">' + esc(p.title) + '</p>' +
+                 '<p class="pub-meta">'  + esc(p.authorDisplay) +
+                   (p.venue ? ' <span class="pub-venue">' + esc(p.venue) + '</span>' : '') +
+                 '</p>' +
+               '</div>' +
+               '<a href="' + esc(p.paperLink) + '" class="pub-link" target="_blank" rel="noopener">PDF →</a>' +
+             '</div>';
     }).join('');
 
     pubList.querySelectorAll('.pub-item').forEach(function (el, i) {
-      setTimeout(function () { el.style.opacity = '1'; el.style.transform = 'none'; }, i * 90);
+      setTimeout(function () {
+        el.style.opacity   = '1';
+        el.style.transform = 'none';
+      }, i * 90);
     });
 
   } catch (err) {
+    /* ── 8. En cas d'erreur → message stylisé ── */
     console.warn('[LITQ OpenAlex]', err);
     showError();
   }
 
   function showError() {
-    pubList.innerHTML = '<div style="border:1px solid var(--border);padding:3rem 2rem;text-align:center;">'
-      + '<p style="font-family:var(--ff-display);font-style:italic;font-size:1.35rem;font-weight:300;color:var(--text);letter-spacing:-0.01em;margin-bottom:0.75rem;">Impossible de charger les publications.</p>'
-      + '<p style="font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-subtle);">Veuillez réessayer plus tard ou consulter directement '
-      + '<a href="https://arxiv.org/search/?searchtype=author&query=Brassard+OR+Dupuis+OR+Salvail+OR+Kristjansson+OR+Sokolov+OR+Hahn+OR+Boyer+OR+Lamontagne" style="color:var(--teal);border-bottom:1px solid var(--border-teal);text-decoration:none;" target="_blank" rel="noopener">arXiv</a></p></div>';
+    pubList.innerHTML =
+      '<div style="' +
+        'border:1px solid var(--border);' +
+        'padding:3rem 2rem;' +
+        'text-align:center;' +
+      '">' +
+        '<p style="' +
+          'font-family:var(--ff-display);' +
+          'font-style:italic;' +
+          'font-size:1.35rem;' +
+          'font-weight:300;' +
+          'color:var(--text);' +
+          'letter-spacing:-0.01em;' +
+          'margin-bottom:0.75rem;' +
+        '">Impossible de charger les publications pour le moment.</p>' +
+        '<p style="' +
+          'font-family:var(--ff-mono);' +
+          'font-size:0.62rem;' +
+          'letter-spacing:0.16em;' +
+          'text-transform:uppercase;' +
+          'color:var(--text-subtle);' +
+        '">Veuillez réessayer plus tard ou consulter directement ' +
+          '<a href="https://arxiv.org/search/?searchtype=author&query=Brassard+OR+Dupuis+OR+Salvail+OR+Kristjansson+OR+Sokolov+OR+Hahn+OR+Boyer+OR+Lamontagne" ' +
+             'style="color:var(--teal);border-bottom:1px solid var(--border-teal);text-decoration:none;" ' +
+             'target="_blank" rel="noopener">arXiv</a>' +
+        '</p>' +
+      '</div>';
   }
+
 })();
 </script>
 </body>
