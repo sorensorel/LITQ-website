@@ -301,24 +301,33 @@
   ];
 
   /* ╔══════════════════════════════════════════════════════════════════╗
-     ║ TEMP — ARTICLES MANUELS (pas encore indexés par OpenAlex)         ║
-     ║ SUPPRIMER ce bloc MANUAL_PAPERS + la ligne [TEMP-MERGE] plus bas  ║
-     ║ dès que ces articles apparaîtront dans le flux de l'API.          ║
+     ║ TEMP — ARTICLES MANUELS                                           ║
+     ║ Ces articles SONT indexés par OpenAlex, mais sous des entités      ║
+     ║ « Gilles Brassard » en doublon qui ne figurent pas dans FACULTY    ║
+     ║ ci-dessus : le filtre par identifiant d'auteur ne les renvoie donc ║
+     ║ jamais.                                                           ║
+     ║   pseudotélépathie → A5129935625   CoALFake → A5040617478         ║
+     ║ (l'identifiant canonique de Brassard est A5110284072)             ║
+     ║ SUPPRIMER ce bloc + les lignes [TEMP-MERGE] plus bas dès que ces   ║
+     ║ identifiants seront fusionnés en amont ou ajoutés à FACULTY.       ║
+     ║ `date` détermine le classement chronologique — garder à jour.      ║
      ╚══════════════════════════════════════════════════════════════════╝ */
   const MANUAL_PAPERS = [
-    {
-      title: 'On the power of multipartite entanglement for pseudotelepathy',
-      authorDisplay: 'G. Brassard, X. Coiteux-Roy, R. Ligez',
-      venue: 'arXiv',
-      year: 2026,
-      paperLink: 'https://arxiv.org/abs/2603.17956'
-    },
     {
       title: 'CoALFake: Collaborative Active Learning with Human-LLM Co-Annotation for Cross-Domain Fake News Detection',
       authorDisplay: 'E. Aïmeur, G. Brassard, D. Sallami',
       venue: 'arXiv',
       year: 2026,
+      date: new Date('2026-04-05'),
       paperLink: 'https://arxiv.org/abs/2604.04174'
+    },
+    {
+      title: 'On the power of multipartite entanglement for pseudotelepathy',
+      authorDisplay: 'G. Brassard, X. Coiteux-Roy, R. Ligez',
+      venue: 'arXiv',
+      year: 2026,
+      date: new Date('2026-03-18'),
+      paperLink: 'https://arxiv.org/abs/2603.17956'
     }
   ];
   /* ╚═════════════════ FIN DU BLOC TEMP ARTICLES MANUELS ════════════════╝ */
@@ -387,10 +396,12 @@
 
     if (papers.length === 0) { showError(); return; }
 
-    /* [TEMP-MERGE] Place MANUAL_PAPERS en tête de la liste des publications
-       sélectionnées. Lors de la suppression du bloc manuel ci-dessus,
-       supprimer entièrement la ligne suivante. */
-    papers.unshift.apply(papers, MANUAL_PAPERS);
+    /* [TEMP-MERGE] Fusionne MANUAL_PAPERS puis retrie l'ensemble de la liste
+       par date (du plus récent au plus ancien), afin que chaque article manuel
+       se place à sa position chronologique exacte plutôt qu'en tête de liste.
+       Lors de la suppression du bloc manuel ci-dessus, supprimer ces deux lignes. */
+    papers.push.apply(papers, MANUAL_PAPERS);
+    papers.sort(function (a, b) { return b.date - a.date; });
 
     /* ── 7. Afficher les 5 premiers avec apparition en cascade ── */
     pubList.innerHTML = papers.slice(0, 5).map(function (p) {
