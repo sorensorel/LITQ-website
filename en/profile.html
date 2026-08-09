@@ -40,6 +40,9 @@
     .interest-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
     .interest-list li { display: flex; align-items: baseline; gap: 0.75rem; font-size: 0.95rem; color: var(--text); line-height: 1.6; }
     .interest-list li::before { content: '—'; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--accent); flex-shrink: 0; }
+    .interest-list li:only-child::before { content: none; }
+    .interest-list li:only-child { display: block; }
+    .interest-list li:only-child p:last-child { margin-bottom: 0; }
     .teaching-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
     .teaching-item { padding: 0.85rem 1.1rem; border: 1px solid var(--border); background: var(--surface); display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; align-items: baseline; }
     .teaching-code { font-family: var(--ff-mono); font-size: 0.71rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); grid-row: 1 / 3; align-self: center; border-right: 1.5px solid var(--border-teal); padding-right: 0.9rem; margin-right: 0.2rem; white-space: nowrap; }

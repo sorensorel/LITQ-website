@@ -500,17 +500,21 @@ window.PEOPLE_DATA = {
         nameFirst: "Marek",
         nameLast: "Arsenault",
         rank: "Master's Student · DIRO, Université de Montréal",
-        researchAreaTags: ["Quantum Algorithms", "Quantum Foundations"],
+        researchAreaTags: ["Quantum Algorithms"],
         links: [{ label: "Personal Website", url: "#" }],
-        bio: [],
-        researchInterests: [],
+        bio: [
+          "I completed my Bachelor's degree in Physics and Computer Science at Université de Montréal, and I am currently finishing my Master's thesis.",
+        ],
+        researchInterests: [
+          "I am broadly interested in Quantum Functional Programming, with the goal of developing new algorithms to transform data encoded in quantum devices given as black boxes. More precisely, my approach leverages product formulas, such as qDrift, to construct functions of Hamiltonians, a process that can be understood as a linearised version of well-known algorithms such as QSP and QSVT.",
+        ],
       },
       fr: {
         eyebrow: "Étudiant(e) à la maîtrise",
         nameFirst: "Marek",
         nameLast: "Arsenault",
         rank: "Étudiant(e) à la maîtrise · DIRO, Université de Montréal",
-        researchAreaTags: ["Algorithmes quantiques", "Fondements quantiques"],
+        researchAreaTags: ["Algorithmes quantiques"],
         links: [{ label: "Site web personnel", url: "#" }],
         bio: [],
         researchInterests: [],
@@ -764,10 +768,17 @@ window.PEOPLE_DATA = {
         nameFirst: "Sahil",
         nameLast: "Naik",
         rank: "Postdoctoral Researcher · DIRO, Université de Montréal",
-        researchAreaTags: ["Quantum Information Theory", "Quantum Foundations", "Higher Order Quantum Theory"],
+        researchAreaTags: ["Quantum Foundations", "Quantum Information", "Indefinite causal order", "Higher order Quantum Transformations"],
         links: [{ label: "Personal Website", url: "#" }],
-        bio: [],
-        researchInterests: [],
+        bio: [
+          "I am a Postdoctoral Fellow at the Université de Montréal (UdeM). I obtained my Master's degree in Physics from the Indian Institute of Science Education and Research (IISER) Thiruvananthapuram, India, and completed my PhD at the S. N. Bose National Centre for Basic Sciences, Kolkata, under the affiliation of Presidency University, India.",
+          "My doctoral research focused on General Probabilistic Theories (GPTs) and their role in understanding quantum phenomena from both foundational and information-theoretic perspectives. During my PhD, I investigated questions related to nonlocality, state discrimination, measurement incompatibility, and information-processing tasks within generalized physical theories. I also studied how novel features of quantum theory, such as indefinite causal order, can be useful in information-processing tasks.",
+        ],
+        researchInterests: [
+          "<p>My research interests are broadly centered around the foundations and information-theoretic aspects of quantum theory. I am particularly interested in the intriguing phenomena of indefinite causal order arising in higher order quantum theory and the implications for quantum information processing. I am also interested in higher-order transformations, which provide a generalized framework extending the notion of quantum channels and offer new ways of understanding transformations between physical processes.</p>" +
+          "<p>An area I am particularly interested in exploring is the role of higher-order transformations as computational resources. I would like to investigate how such generalized transformations can be harnessed for computation and whether they can provide new perspectives on the foundations and broader theoretical landscape of computer science.</p>" +
+          "<p>More broadly, I am interested in exploring the operational and foundational principles underlying quantum theory and understanding how these principles can lead to novel approaches to quantum information processing.</p>",
+        ],
       },
       fr: {
         eyebrow: "Postdoc",
