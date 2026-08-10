@@ -7,7 +7,7 @@ Instructions :
 
 ## Short term
 
-- [ ] Update Hlér's sub-group — see his website
+- [x] Update Hlér's sub-group — see his website
 - [ ] Update  the website from feedbacks received in emails April/May (Taha received them, talk to him if any question)
 
 ## Long term
