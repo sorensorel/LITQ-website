@@ -1,10 +1,13 @@
 {
-  "enabledPlugins": {
-    "frontend-design@claude-code-plugins": true
-  },
   "permissions": {
     "allow": [
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(tasklist)",
+      "Bash(node screenshot.mjs \"http://localhost:3000/en/profile.html?id=hler-kristjansson\" hler-affiliates)",
+      "PowerShell(node --version)"
     ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-code-plugins": true
   }
 }
