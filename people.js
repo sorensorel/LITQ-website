@@ -1,3 +1,8 @@
+// supervisedBy: array of internal person ids (co-supervision supported), or null.
+// externalSupervisors (optional): [{ name, title, url }] for supervisors/co-supervisors
+// outside the lab who don't have their own profile card — url is optional.
+// incoming (optional): true for a person who hasn't arrived yet — shows under their
+// supervisor's "Incoming Members" profile section instead of "Current Students".
 window.PEOPLE_DATA = {
   people: [
     {
@@ -344,7 +349,7 @@ window.PEOPLE_DATA = {
       thumbnailPosition: "center",
       thumbnailOrigin: "center center",
       supervisedBy: null,
-      supervises: ["marek-arsenault", "daniel-bilsborrow", "taha-skiredj", "alexandre-charland", "sahil-naik"],
+      supervises: ["marek-arsenault", "daniel-bilsborrow", "taha-skiredj", "alexandre-charland", "sahil-naik", "anantha-krishnan-sunilkumar"],
       formerStudents: [
         { name: "Thomas Vinet", role: "Master's research intern, Perimeter Institute & Télécom Paris, Feb–Aug 2024" },
         { name: "Yan Zhong", role: "PhD student, Johns Hopkins University (external project co-supervision), April 2023–Aug 2024" },
@@ -786,6 +791,111 @@ window.PEOPLE_DATA = {
         nameLast: "Naik",
         rank: "Chercheur Postdoctoral · DIRO, Université de Montréal",
         researchAreaTags: ["Théorie de l'information quantique", "Fondements quantiques", "Théorie quantique d'ordre supérieur"],
+        links: [{ label: "Site web personnel", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+    },
+    {
+      id: "anantha-krishnan-sunilkumar",
+      photo: null,
+      supervisedBy: null,
+      supervises: [],
+      formerStudents: [],
+      teaching: [],
+      externalSupervisors: [
+        {
+          name: "Guillaume Rabusseau",
+          title: "Assistant Professor · Mila & DIRO, Université de Montréal",
+          url: "https://www-labs.iro.umontreal.ca/~grabus/",
+        },
+      ],
+      en: {
+        eyebrow: "Associate Researcher",
+        nameFirst: "Anantha Krishnan",
+        nameLast: "Sunilkumar",
+        rank: "Associate Researcher · DIRO, Université de Montréal",
+        researchAreaTags: ["Quantum Information Theory"],
+        links: [{ label: "Personal Website", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+      fr: {
+        eyebrow: "Chercheur associé",
+        nameFirst: "Anantha Krishnan",
+        nameLast: "Sunilkumar",
+        rank: "Chercheur associé · DIRO, Université de Montréal",
+        researchAreaTags: ["Théorie de l'information quantique"],
+        links: [{ label: "Site web personnel", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+    },
+    {
+      id: "leo-londeix-pagnard",
+      photo: null,
+      incoming: true,
+      supervisedBy: ["hler-kristjansson"],
+      supervises: [],
+      formerStudents: [],
+      teaching: [],
+      externalSupervisors: [
+        {
+          name: "Michel Côté",
+          title: "Professor · Department of Physics, Université de Montréal",
+          url: "https://phys.umontreal.ca/repertoire-departement/professeurs/professeur/in/in14301/sg/Michel%20C%C3%B4t%C3%A9/",
+        },
+        {
+          name: "Matthias Ernzerhof",
+          title: "Professor · Department of Chemistry, Université de Montréal",
+          url: "https://chimie.umontreal.ca/english/department-directory/professors/professor/in/in14628/sg/Matthias%20Ernzerhof/",
+        },
+      ],
+      en: {
+        eyebrow: "Incoming Member",
+        nameFirst: "Léo",
+        nameLast: "Londeix-Pagnard",
+        rank: "PhD Student · Université de Montréal · Sep 2026",
+        researchAreaTags: [],
+        links: [{ label: "Personal Website", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+      fr: {
+        eyebrow: "Membre à venir",
+        nameFirst: "Léo",
+        nameLast: "Londeix-Pagnard",
+        rank: "Doctorant(e) · Université de Montréal · Sept. 2026",
+        researchAreaTags: [],
+        links: [{ label: "Site web personnel", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+    },
+    {
+      id: "maelys-viegas",
+      photo: null,
+      incoming: true,
+      supervisedBy: ["hler-kristjansson"],
+      supervises: [],
+      formerStudents: [],
+      teaching: [],
+      en: {
+        eyebrow: "Incoming Member",
+        nameFirst: "Maelys",
+        nameLast: "Viegas",
+        rank: "Master's Research Intern · Université de Montréal & Télécom Paris · Mar 2027",
+        researchAreaTags: [],
+        links: [{ label: "Personal Website", url: "#" }],
+        bio: [],
+        researchInterests: [],
+      },
+      fr: {
+        eyebrow: "Membre à venir",
+        nameFirst: "Maelys",
+        nameLast: "Viegas",
+        rank: "Stagiaire de recherche à la maîtrise · Université de Montréal & Télécom Paris · Mars 2027",
+        researchAreaTags: [],
         links: [{ label: "Site web personnel", url: "#" }],
         bio: [],
         researchInterests: [],

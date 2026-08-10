@@ -24,14 +24,14 @@
     .prev-members { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
     .prev-members-title { font-family: var(--ff-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.6rem; }
     .prev-members-title::before { content: ''; display: block; width: 20px; height: 1px; background: var(--text-subtle); opacity: 0.5; }
-    .prev-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.5rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
-    .prev-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
-    .prev-table tr { border-bottom: 1px solid var(--border); }
-    .prev-table tr:last-child { border-bottom: none; }
-    .prev-table td { padding: 0.3rem 0.5rem; font-size: 0.88rem; color: var(--text-muted); vertical-align: middle; }
-    .prev-table td:first-child { font-family: var(--ff-display); font-size: 1.0rem; color: var(--text); font-weight: 400; padding-left: 0; min-width: 160px; }
-    .prev-table .prev-tag { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-    .prev-table .prev-note { font-size: 0.82rem; color: var(--text-subtle); font-style: italic; }
+    .roster-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.5rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
+    .roster-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
+    .roster-table tr { border-bottom: 1px solid var(--border); }
+    .roster-table tr:last-child { border-bottom: none; }
+    .roster-table td { padding: 0.3rem 0.5rem; font-size: 0.88rem; color: var(--text-muted); vertical-align: middle; }
+    .roster-table td:first-child { font-family: var(--ff-display); font-size: 1.0rem; color: var(--text); font-weight: 400; padding-left: 0; min-width: 160px; }
+    .roster-table .roster-tag { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
+    .roster-table .roster-note { font-size: 0.82rem; color: var(--text-subtle); font-style: italic; }
   </style>
 </head>
 <body>
@@ -111,8 +111,10 @@
   var CATS = [
     { keys: ['Faculty'],                          label: 'Faculty' },
     { keys: ['Postdoc'],                          label: 'Postdoctoral Researchers' },
+    { keys: ['Associate Researcher'],             label: 'Associate Researchers' },
     { keys: ['PhD Student'],                       label: 'PhD Students' },
     { keys: ["Master's Students"],                label: "Master's Students" },
+    { keys: ['Incoming Member'],                  label: 'Incoming Members' },
     { keys: ['Former Faculty'],                   label: 'Former Faculty' },
   ];
 
@@ -205,26 +207,26 @@
         + '<p class="prev-members-title">Previous Members</p>';
 
       if (postdocs.length > 0) {
-        prevHtml += '<p class="prev-subhead">Past Postdoctoral Researchers</p>'
-          + '<table class="prev-table">';
+        prevHtml += '<p class="roster-subhead">Past Postdoctoral Researchers</p>'
+          + '<table class="roster-table">';
         postdocs.forEach(function (p) {
           prevHtml += '<tr>'
             + '<td>' + p.name + '</td>'
-            + '<td><span class="prev-tag">Postdoc · ' + p.years + '</span></td>'
-            + '<td class="prev-note">' + (p.note || '') + '</td>'
+            + '<td><span class="roster-tag">Postdoc · ' + p.years + '</span></td>'
+            + '<td class="roster-note">' + (p.note || '') + '</td>'
             + '</tr>';
         });
         prevHtml += '</table>';
       }
 
       if (students.length > 0) {
-        prevHtml += '<p class="prev-subhead">Past Students</p>'
-          + '<table class="prev-table">';
+        prevHtml += '<p class="roster-subhead">Past Students</p>'
+          + '<table class="roster-table">';
         students.forEach(function (s) {
           prevHtml += '<tr>'
             + '<td>' + s.name + '</td>'
-            + '<td><span class="prev-tag">' + s.degree + ' · ' + s.year + '</span><br>' + s.supervisor + '</td>'
-            + '<td class="prev-note">' + (s.note || '') + '</td>'
+            + '<td><span class="roster-tag">' + s.degree + ' · ' + s.year + '</span><br>' + s.supervisor + '</td>'
+            + '<td class="roster-note">' + (s.note || '') + '</td>'
             + '</tr>';
         });
         prevHtml += '</table>';

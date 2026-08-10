@@ -48,8 +48,9 @@
     .teaching-code { font-family: var(--ff-mono); font-size: 0.71rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subtle); grid-row: 1 / 3; align-self: center; border-right: 1.5px solid var(--border-teal); padding-right: 0.9rem; margin-right: 0.2rem; white-space: nowrap; }
     .teaching-name { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: var(--text); }
     .teaching-detail { font-family: var(--ff-mono); font-size: 0.69rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-    .supervisor-link { display: inline-flex; flex-direction: column; gap: 0.25rem; font-family: var(--ff-display); font-size: 1.2rem; font-weight: 300; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; }
-    .supervisor-link:hover { color: var(--accent); border-color: var(--accent); }
+    .supervisor-list { display: flex; flex-direction: column; gap: 1rem; }
+    .supervisor-link { display: inline-flex; flex-direction: column; gap: 0.25rem; font-family: var(--ff-display); font-size: 1.2rem; font-weight: 300; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; width: fit-content; }
+    a.supervisor-link:hover { color: var(--accent); border-color: var(--accent); }
     .supervisor-link-rank { font-family: var(--ff-mono); font-size: 0.69rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); }
     .supervises-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .supervises-item { display: flex; align-items: baseline; gap: 0.75rem; }
@@ -165,23 +166,50 @@
     // Research interests
     const interestsHtml = l.researchInterests.map(function(i) { return '<li>' + i + '</li>'; }).join('');
 
-    // Supervisor section — direct supervisedBy OR reverse lookup from faculty supervises arrays
+    // Supervisor(s) section — internal supervisor(s) via supervisedBy (or reverse lookup from
+    // faculty supervises arrays for legacy entries), plus any external supervisors/co-supervisors
+    var supervisorEntries = [];
+    var supervisedByIds = Array.isArray(person.supervisedBy)
+      ? person.supervisedBy
+      : (person.supervisedBy ? [person.supervisedBy] : []);
+    supervisedByIds.forEach(function(id) {
+      var sp = allPeople.find(function(p) { return p.id === id; });
+      if (!sp) return;
+      var spL = sp[LANG] || sp.en;
+      supervisorEntries.push({ name: spL.nameFirst + ' ' + spL.nameLast, rank: spL.rank, url: 'profile.html?id=' + sp.id, internal: true });
+    });
+    var hasExternalSupervisors = person.externalSupervisors && person.externalSupervisors.length > 0;
+    if (supervisorEntries.length === 0 && !hasExternalSupervisors) {
+      // Reverse lookup only applies when no supervisor has been stated explicitly — it infers
+      // an internal supervisor from a faculty member's `supervises` list, which would be wrong
+      // for someone whose real supervisor is external but who is still cross-linked from a lab
+      // member's profile (e.g. an associate researcher hosted by, but not supervised by, the lab).
+      allPeople.forEach(function(p) {
+        if (p.supervises && p.supervises.indexOf(person.id) !== -1) {
+          var pL = p[LANG] || p.en;
+          supervisorEntries.push({ name: pL.nameFirst + ' ' + pL.nameLast, rank: pL.rank, url: 'profile.html?id=' + p.id, internal: true });
+        }
+      });
+    }
+    (person.externalSupervisors || []).forEach(function(ext) {
+      supervisorEntries.push({ name: ext.name, rank: ext.title, url: ext.url || null, internal: false });
+    });
+
     var supervisorHtml = '';
-    var supervisorPerson = null;
-    if (person.supervisedBy) {
-      supervisorPerson = allPeople.find(function(p) { return p.id === person.supervisedBy; });
-    }
-    if (!supervisorPerson) {
-      supervisorPerson = allPeople.find(function(p) { return p.supervises && p.supervises.indexOf(person.id) !== -1; });
-    }
-    if (supervisorPerson) {
-      var supL = supervisorPerson[LANG] || supervisorPerson.en;
+    if (supervisorEntries.length > 0) {
       supervisorHtml = '<div class="profile-section reveal">'
-        + '<div class="profile-section-label">Supervisor</div>'
-        + '<a href="profile.html?id=' + supervisorPerson.id + '" class="supervisor-link">'
-        + supL.nameFirst + ' ' + supL.nameLast
-        + '<span class="supervisor-link-rank">' + supL.rank + '</span>'
-        + '</a>'
+        + '<div class="profile-section-label">' + (supervisorEntries.length > 1 ? 'Supervisors' : 'Supervisor') + '</div>'
+        + '<div class="supervisor-list">'
+        + supervisorEntries.map(function(s) {
+          var tag = s.url ? 'a' : 'span';
+          var attrs = s.url ? ' href="' + s.url + '"' + (s.internal ? '' : ' target="_blank" rel="noopener"') : '';
+          var rankLabel = s.rank ? s.rank + (s.internal ? '' : ' · External') : (s.internal ? '' : 'External');
+          return '<' + tag + ' class="supervisor-link"' + attrs + '>'
+            + s.name
+            + (rankLabel ? '<span class="supervisor-link-rank">' + rankLabel + '</span>' : '')
+            + '</' + tag + '>';
+        }).join('')
+        + '</div>'
         + '</div>';
     }
 
@@ -205,6 +233,27 @@
           + '</ul>'
           + '</div>';
       }
+    }
+
+    // Incoming members section — anyone flagged `incoming: true` whose supervisedBy includes
+    // this person (internal co-supervisors also see them here, not just their primary supervisor)
+    var incomingMembersHtml = '';
+    var incomingMembers = allPeople.filter(function(p) {
+      return p.incoming && Array.isArray(p.supervisedBy) && p.supervisedBy.indexOf(person.id) !== -1;
+    });
+    if (incomingMembers.length > 0) {
+      incomingMembersHtml = '<div class="profile-section reveal">'
+        + '<div class="profile-section-label">Incoming Members</div>'
+        + '<ul class="supervises-list">'
+        + incomingMembers.map(function(s) {
+          var sL = s[LANG] || s.en;
+          return '<li class="supervises-item">'
+            + '<a href="profile.html?id=' + s.id + '" class="supervises-link">' + sL.nameFirst + ' ' + sL.nameLast + '</a>'
+            + '<span class="supervises-role">' + sL.rank.split('·')[0].trim() + '</span>'
+            + '</li>';
+        }).join('')
+        + '</ul>'
+        + '</div>';
     }
 
     // Former students section
@@ -281,6 +330,7 @@
       + '</div>'
       + supervisorHtml
       + supervisesHtml
+      + incomingMembersHtml
       + formerStudentsHtml
       + teachingHtml
       + '</div>';
