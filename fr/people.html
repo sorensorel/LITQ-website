@@ -24,14 +24,17 @@
     .prev-members { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
     .prev-members-title { font-family: var(--ff-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.6rem; }
     .prev-members-title::before { content: ''; display: block; width: 20px; height: 1px; background: var(--text-subtle); opacity: 0.5; }
-    .prev-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.5rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
+    .prev-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.7rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
+    .prev-subnote { display: block; margin-top: 0.15rem; font-family: var(--ff-mono); font-size: 0.58rem; font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
     .prev-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
-    .prev-table tr { border-bottom: 1px solid var(--border); }
+    .prev-table tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+    .prev-table tr { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(120px, 1.15fr); align-items: center; border-bottom: 1px solid var(--border); }
     .prev-table tr:last-child { border-bottom: none; }
-    .prev-table td { padding: 0.3rem 0.5rem; font-size: 0.88rem; color: var(--text-muted); vertical-align: middle; }
-    .prev-table td:first-child { font-family: var(--ff-display); font-size: 1.0rem; color: var(--text); font-weight: 400; padding-left: 0; min-width: 160px; }
+    .prev-table td { padding: 0.35rem 0.4rem; font-size: 0.82rem; line-height: 1.35; color: var(--text-muted); vertical-align: middle; }
+    .prev-table td:first-child { font-family: var(--ff-display); font-size: 0.95rem; color: var(--text); font-weight: 400; padding-left: 0; }
     .prev-table .prev-tag { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-    .prev-table .prev-note { font-size: 0.82rem; color: var(--text-subtle); font-style: italic; }
+    .prev-table .prev-note { grid-column: 1 / -1; padding: 0 0 0.3rem; font-size: 0.76rem; color: var(--text-subtle); font-style: italic; }
+    @media (max-width: 780px) { .prev-table tbody { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -46,7 +49,7 @@
     <li><a href="research.html">Recherche</a></li>
     <li><a href="people.html" class="active">Équipe</a></li>
     <li><a href="publications.html">Publications</a></li>
-    <li><a href="positions.html">Rejoindre</a></li>
+    <li><a href="positions.html">Nous rejoindre</a></li>
   </ul>
   <a href="../en/people.html" class="lang-toggle">EN</a>
   <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -85,7 +88,7 @@
   <div class="footer-contact">
     <h4>Nous contacter</h4>
     <p style="margin-top:0; font-size:0.95rem; line-height:1.7; color:var(--text-muted);">
-      <span style="white-space:nowrap;">Département d'Informatique et de</span><br><span style="white-space:nowrap;">Recherche Opérationnelle (DIRO)</span><br>
+      <span style="white-space:nowrap;">Département d'informatique et de</span><br><span style="white-space:nowrap;">recherche opérationnelle (DIRO)</span><br>
       Université de Montréal<br>
       Pavillon André-Aisenstadt<br>
       2920, chemin de la Tour<br>
@@ -98,11 +101,11 @@
 </footer>
 <div class="footer-bottom">
   <p>© 2026 LITQ — Université de Montréal. Tous droits réservés.</p>
-  <p>Département d'Informatique et de Recherche Opérationnelle</p>
+  <p>Département d'informatique et de recherche opérationnelle</p>
   <p>Site conçu par Daniel Bilsborrow</p>
 </div>
 
-<script src="../people.js?v=4"></script>
+<script src="../people.js?v=10"></script>
 <script>
 (function () {
   var LANG = 'fr';
@@ -110,9 +113,9 @@
   /* Ordre d'affichage des catégories — rendues seulement si au moins une personne correspond */
   var CATS = [
     { keys: ['Corps professoral'],              label: 'Corps professoral' },
-    { keys: ['Postdoc'],                        label: 'Chercheur·se·s postdoctoraux·ales' },
-    { keys: ['Doctorant(e)'],                   label: 'Doctorant·e·s' },
-    { keys: ['Étudiant(e) à la maîtrise'],      label: 'Étudiant·e·s à la maîtrise' },
+    { keys: ['Postdoc'],                        label: 'Équipe postdoctorale' },
+    { keys: ['Doctorant(e)'],                   label: 'Doctorat' },
+    { keys: ['Étudiant(e) à la maîtrise'],      label: 'Maîtrise' },
     { keys: ['Ancien corps professoral'],       label: 'Ancien corps professoral' },
   ];
 
@@ -125,6 +128,9 @@
   function frNote(n) {
     if (!n) return '';
     if (n === 'TBC') return 'À confirmer';
+    if (n === 'Now adjunct professor at LITQ') return 'Maintenant professeur associé au LITQ';
+    if (n === 'Now associate professor at LITQ') return 'Maintenant professeur agrégé au LITQ';
+    if (n === 'Now full professor at LITQ') return 'Maintenant professeur titulaire au LITQ';
     return n.replace(/^Now at /, 'Maintenant à ');
   }
 
@@ -142,6 +148,7 @@
   function makeCard(p) {
     var l = p[LANG] || p.en;
     var rankShort = l.rank ? l.rank.split('·')[0].trim() : l.eyebrow;
+    var isStudent = l.eyebrow === 'Doctorant(e)' || l.eyebrow === 'Étudiant(e) à la maîtrise';
     var area = (l.researchAreaTags || []).slice(0, 2).join(' · ');
     var photoSrc;
     if (p.photo === null) {
@@ -160,7 +167,7 @@
     return '<a id="' + p.id + '" class="team-card" href="profile.html?id=' + p.id + '" style="text-decoration:none;">'
       + '<div class="team-photo"' + (thumbStyle ? ' style="' + thumbStyle + '"' : '') + '><img src="' + photoSrc + '" alt="' + l.nameFirst + ' ' + l.nameLast + '" loading="lazy"' + imgStyle + '></div>'
       + '<p class="team-name">' + l.nameFirst + ' ' + l.nameLast + '</p>'
-      + '<p class="team-role">' + rankShort + '</p>'
+      + (isStudent ? '' : '<p class="team-role">' + rankShort + '</p>')
       + '<p class="team-area">' + area + '</p>'
       + '</a>';
   }
@@ -217,26 +224,26 @@
         + '<p class="prev-members-title">Anciens membres</p>';
 
       if (postdocs.length > 0) {
-        prevHtml += '<p class="prev-subhead">Ancien·ne·s chercheur·se·s postdoctoraux·ales</p>'
+        prevHtml += '<p class="prev-subhead">Anciens membres de l\'\u00e9quipe postdoctorale</p>'
           + '<table class="prev-table">';
         postdocs.forEach(function (p) {
           prevHtml += '<tr>'
             + '<td>' + p.name + '</td>'
             + '<td><span class="prev-tag">Postdoc · ' + p.years + '</span></td>'
-            + '<td class="prev-note">' + frNote(p.note) + '</td>'
+            + (frNote(p.note) ? '<td class="prev-note">' + frNote(p.note) + '</td>' : '')
             + '</tr>';
         });
         prevHtml += '</table>';
       }
 
       if (students.length > 0) {
-        prevHtml += '<p class="prev-subhead">Ancien·ne·s étudiant·e·s</p>'
+        prevHtml += '<p class="prev-subhead">Anciens membres de l\'\u00e9quipe étudiante<span class="prev-subnote">Liste non exhaustive</span></p>'
           + '<table class="prev-table">';
         students.forEach(function (s) {
           prevHtml += '<tr>'
             + '<td>' + s.name + '</td>'
             + '<td><span class="prev-tag">' + frDegree(s.degree) + ' · ' + s.year + '</span><br>' + s.supervisor + '</td>'
-            + '<td class="prev-note">' + frNote(s.note) + '</td>'
+            + (frNote(s.note) ? '<td class="prev-note">' + frNote(s.note) + '</td>' : '')
             + '</tr>';
         });
         prevHtml += '</table>';
