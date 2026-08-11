@@ -24,14 +24,17 @@
     .prev-members { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
     .prev-members-title { font-family: var(--ff-mono); font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.6rem; }
     .prev-members-title::before { content: ''; display: block; width: 20px; height: 1px; background: var(--text-subtle); opacity: 0.5; }
-    .prev-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.5rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
+    .prev-subhead { font-family: var(--ff-display); font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--text); margin-bottom: 0.7rem; margin-top: 1.6rem; letter-spacing: -0.01em; }
+    .prev-subnote { display: block; margin-top: 0.15rem; font-family: var(--ff-mono); font-size: 0.58rem; font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
     .prev-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
-    .prev-table tr { border-bottom: 1px solid var(--border); }
+    .prev-table tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+    .prev-table tr { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(120px, 1.15fr); align-items: center; border-bottom: 1px solid var(--border); }
     .prev-table tr:last-child { border-bottom: none; }
-    .prev-table td { padding: 0.3rem 0.5rem; font-size: 0.88rem; color: var(--text-muted); vertical-align: middle; }
-    .prev-table td:first-child { font-family: var(--ff-display); font-size: 1.0rem; color: var(--text); font-weight: 400; padding-left: 0; min-width: 160px; }
+    .prev-table td { padding: 0.35rem 0.4rem; font-size: 0.82rem; line-height: 1.35; color: var(--text-muted); vertical-align: middle; }
+    .prev-table td:first-child { font-family: var(--ff-display); font-size: 0.95rem; color: var(--text); font-weight: 400; padding-left: 0; }
     .prev-table .prev-tag { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-    .prev-table .prev-note { font-size: 0.82rem; color: var(--text-subtle); font-style: italic; }
+    .prev-table .prev-note { grid-column: 1 / -1; padding: 0 0 0.3rem; font-size: 0.76rem; color: var(--text-subtle); font-style: italic; }
+    @media (max-width: 780px) { .prev-table tbody { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -102,7 +105,7 @@
   <p>Website design by Daniel Bilsborrow</p>
 </div>
 
-<script src="../people.js?v=4"></script>
+<script src="../people.js?v=10"></script>
 <script>
 (function () {
   var LANG = 'en';
@@ -211,20 +214,20 @@
           prevHtml += '<tr>'
             + '<td>' + p.name + '</td>'
             + '<td><span class="prev-tag">Postdoc · ' + p.years + '</span></td>'
-            + '<td class="prev-note">' + (p.note || '') + '</td>'
+            + (p.note ? '<td class="prev-note">' + p.note + '</td>' : '')
             + '</tr>';
         });
         prevHtml += '</table>';
       }
 
       if (students.length > 0) {
-        prevHtml += '<p class="prev-subhead">Past Students</p>'
+        prevHtml += '<p class="prev-subhead">Past Students<span class="prev-subnote">Non-exhaustive list</span></p>'
           + '<table class="prev-table">';
         students.forEach(function (s) {
           prevHtml += '<tr>'
             + '<td>' + s.name + '</td>'
             + '<td><span class="prev-tag">' + s.degree + ' · ' + s.year + '</span><br>' + s.supervisor + '</td>'
-            + '<td class="prev-note">' + (s.note || '') + '</td>'
+            + (s.note ? '<td class="prev-note">' + s.note + '</td>' : '')
             + '</tr>';
         });
         prevHtml += '</table>';

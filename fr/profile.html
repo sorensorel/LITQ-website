@@ -72,7 +72,7 @@
     <li><a href="research.html">Recherche</a></li>
     <li><a href="people.html" class="active">Équipe</a></li>
     <li><a href="publications.html">Publications</a></li>
-    <li><a href="positions.html">Rejoindre</a></li>
+    <li><a href="positions.html">Nous rejoindre</a></li>
   </ul>
   <a id="lang-toggle" href="../en/profile.html" class="lang-toggle">EN</a>
   <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -100,7 +100,7 @@
   <div class="footer-contact">
     <h4>Nous contacter</h4>
     <p style="margin-top:0; font-size:0.95rem; line-height:1.7; color:var(--text-muted);">
-      <span style="white-space:nowrap;">Département d'Informatique et de</span><br><span style="white-space:nowrap;">Recherche Opérationnelle (DIRO)</span><br>
+      <span style="white-space:nowrap;">Département d'informatique et de</span><br><span style="white-space:nowrap;">recherche opérationnelle (DIRO)</span><br>
       Université de Montréal<br>
       Pavillon André-Aisenstadt<br>
       2920, chemin de la Tour<br>
@@ -113,11 +113,11 @@
 </footer>
 <div class="footer-bottom">
   <p>© 2026 LITQ — Université de Montréal. Tous droits réservés.</p>
-  <p>Département d'Informatique et de Recherche Opérationnelle</p>
+  <p>Département d'informatique et de recherche opérationnelle</p>
   <p>Site conçu par Daniel Bilsborrow</p>
 </div>
 
-<script src="../people.js?v=4"></script>
+<script src="../people.js?v=10"></script>
 <script>
 (function () {
   const LANG = 'fr';
@@ -185,7 +185,7 @@
     if (supervisorPerson) {
       var supL = supervisorPerson[LANG] || supervisorPerson.en;
       supervisorHtml = '<div class="profile-section reveal">'
-        + '<div class="profile-section-label">Directeur·rice de thèse</div>'
+        + '<div class="profile-section-label">Direction de thèse</div>'
         + '<a href="profile.html?id=' + supervisorPerson.id + '" class="supervisor-link">'
         + supL.nameFirst + ' ' + supL.nameLast
         + '<span class="supervisor-link-rank">' + supL.rank + '</span>'
@@ -201,7 +201,7 @@
       }).filter(Boolean);
       if (students.length > 0) {
         supervisesHtml = '<div class="profile-section reveal">'
-          + '<div class="profile-section-label">Étudiant·e·s actuel·le·s</div>'
+          + '<div class="profile-section-label">Membres actuels de l\'\u00e9quipe étudiante</div>'
           + '<ul class="supervises-list">'
           + students.map(function(s) {
             var sL = s[LANG] || s.en;
@@ -219,7 +219,7 @@
     var formerStudentsHtml = '';
     if (person.formerStudents && person.formerStudents.length > 0) {
       formerStudentsHtml = '<div class="profile-section reveal">'
-        + '<div class="profile-section-label">Ancien·ne·s étudiant·e·s</div>'
+        + '<div class="profile-section-label">Anciens membres de l\'\u00e9quipe étudiante</div>'
         + '<ul class="supervises-list">'
         + person.formerStudents.map(function(fs) {
           var linked = fs.id ? allPeople.find(function(p) { return p.id === fs.id; }) : null;
