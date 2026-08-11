@@ -4,7 +4,11 @@
       "Bash(python3 -c ' *)",
       "Bash(tasklist)",
       "Bash(node screenshot.mjs \"http://localhost:3000/en/profile.html?id=hler-kristjansson\" hler-affiliates)",
-      "PowerShell(node --version)"
+      "PowerShell(node --version)",
+      "PowerShell(Start-Process -FilePath node -ArgumentList \"serve.mjs\" -WorkingDirectory \"c:\\\\Users\\\\Admin\\\\Documents\\\\GitHub\\\\LITQ-website\" -WindowStyle Hidden)",
+      "PowerShell(Get-Command node -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command npm -ErrorAction SilentlyContinue)",
+      "WebFetch(domain:api.openalex.org)"
     ]
   },
   "enabledPlugins": {

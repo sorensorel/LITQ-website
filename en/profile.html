@@ -53,12 +53,12 @@
     a.supervisor-link:hover { color: var(--accent); border-color: var(--accent); }
     .supervisor-link-rank { font-family: var(--ff-mono); font-size: 0.69rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); }
     .supervises-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .supervises-item { display: flex; align-items: baseline; gap: 0.75rem; }
+    .supervises-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.75rem; }
     .supervises-item::before { content: '—'; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--accent); flex-shrink: 0; }
-    .supervises-link { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 300; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+    .supervises-link { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 300; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
     .supervises-link:hover { color: var(--accent); border-color: var(--accent); }
     .supervises-role { font-family: var(--ff-mono); font-size: 0.67rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-subtle); margin-left: 0.5rem; }
-    .supervises-name { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 300; color: var(--text); }
+    .supervises-name { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 300; color: var(--text); white-space: nowrap; }
     .sec-eyebrow { font-size: 0.90rem; }
     #profile-loading { display: flex; align-items: center; justify-content: center; min-height: 60vh; font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-subtle); }
     @media (max-width: 768px) { .profile-header { grid-template-columns: 160px 1fr; gap: 2rem; } }
@@ -213,24 +213,38 @@
         + '</div>';
     }
 
-    // Current students section
+    // Current students / current postdocs sections — postdocs get their own subheading
+    // rather than being mixed in among the students.
     var supervisesHtml = '';
+    var currentPostdocsHtml = '';
     if (person.supervises && person.supervises.length > 0) {
-      var students = person.supervises.map(function(id) {
+      var supervisees = person.supervises.map(function(id) {
         return allPeople.find(function(p) { return p.id === id; });
       }).filter(Boolean);
+      var postdocs = supervisees.filter(function(s) { return (s[LANG] || s.en).eyebrow === 'Postdoc'; });
+      var students = supervisees.filter(function(s) { return (s[LANG] || s.en).eyebrow !== 'Postdoc'; });
+      function renderSuperviseeList(list) {
+        return '<ul class="supervises-list">'
+          + list.map(function(s) {
+            var sL = s[LANG] || s.en;
+            var roleLabel = sL.rank ? sL.rank.split('·')[0].trim() : sL.eyebrow;
+            return '<li class="supervises-item">'
+              + '<a href="profile.html?id=' + s.id + '" class="supervises-link">' + sL.nameFirst + ' ' + sL.nameLast + '</a>'
+              + '<span class="supervises-role">' + roleLabel + '</span>'
+              + '</li>';
+          }).join('')
+          + '</ul>';
+      }
+      if (postdocs.length > 0) {
+        currentPostdocsHtml = '<div class="profile-section reveal">'
+          + '<div class="profile-section-label">Current Postdocs</div>'
+          + renderSuperviseeList(postdocs)
+          + '</div>';
+      }
       if (students.length > 0) {
         supervisesHtml = '<div class="profile-section reveal">'
           + '<div class="profile-section-label">Current Students</div>'
-          + '<ul class="supervises-list">'
-          + students.map(function(s) {
-            var sL = s[LANG] || s.en;
-            return '<li class="supervises-item">'
-              + '<a href="profile.html?id=' + s.id + '" class="supervises-link">' + sL.nameFirst + ' ' + sL.nameLast + '</a>'
-              + '<span class="supervises-role">' + sL.eyebrow + '</span>'
-              + '</li>';
-          }).join('')
-          + '</ul>'
+          + renderSuperviseeList(students)
           + '</div>';
       }
     }
@@ -264,9 +278,14 @@
         + '<ul class="supervises-list">'
         + person.formerStudents.map(function(fs) {
           var linked = fs.id ? allPeople.find(function(p) { return p.id === fs.id; }) : null;
-          var nameHtml = linked
-            ? '<a href="profile.html?id=' + linked.id + '" class="supervises-link">' + fs.name + '</a>'
-            : '<span class="supervises-name">' + fs.name + '</span>';
+          var nameHtml;
+          if (linked) {
+            nameHtml = '<a href="profile.html?id=' + linked.id + '" class="supervises-link">' + fs.name + '</a>';
+          } else if (fs.url) {
+            nameHtml = '<a href="' + fs.url + '" class="supervises-link" target="_blank" rel="noopener">' + fs.name + '</a>';
+          } else {
+            nameHtml = '<span class="supervises-name">' + fs.name + '</span>';
+          }
           var roleHtml = fs.role ? '<span class="supervises-role">' + fs.role + '</span>' : '';
           return '<li class="supervises-item">' + nameHtml + roleHtml + '</li>';
         }).join('')
@@ -347,6 +366,7 @@
       + '<ul class="interest-list">' + interestsHtml + '</ul>'
       + '</div>'
       + supervisorHtml
+      + currentPostdocsHtml
       + supervisesHtml
       + researchAffiliatesHtml
       + incomingMembersHtml
