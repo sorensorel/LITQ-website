@@ -214,22 +214,17 @@
   let currentPage = 1;
 
   /* ╔══════════════════════════════════════════════════════════════════╗
-     ║ TEMP — MANUAL PAPERS (not yet indexed by OpenAlex)                ║
-     ║ DELETE this entire MANUAL_PAPERS block + the [TEMP-MERGE] line    ║
-     ║ further down once these papers appear in the API feed.            ║
+     ║ TEMP — MANUAL PAPERS                                              ║
+     ║ These ARE indexed by OpenAlex, but under duplicate Gilles Brassard ║
+     ║ author entities that are not in FACULTY below, so the author-id     ║
+     ║ filter never returns them:                                        ║
+     ║   pseudotelepathy → A5129935625   CoALFake → A5040617478          ║
+     ║ (canonical Brassard is A5110284072)                               ║
+     ║ DELETE this block + the [TEMP-MERGE] lines further down once those ║
+     ║ IDs are merged upstream or added to FACULTY.                      ║
+     ║ `date` drives chronological placement — keep it in sync w/ arXiv.  ║
      ╚══════════════════════════════════════════════════════════════════╝ */
   const MANUAL_PAPERS = [
-    {
-      title: 'On the power of multipartite entanglement for pseudotelepathy',
-      authorships: [
-        { author: { display_name: 'Gilles Brassard' } },
-        { author: { display_name: 'Xavier Coiteux-Roy' } },
-        { author: { display_name: 'Rémi Ligez' } }
-      ],
-      venue: 'arXiv',
-      year: 2026,
-      paperLink: 'https://arxiv.org/abs/2603.17956'
-    },
     {
       title: 'CoALFake: Collaborative Active Learning with Human-LLM Co-Annotation for Cross-Domain Fake News Detection',
       authorships: [
@@ -239,7 +234,20 @@
       ],
       venue: 'arXiv',
       year: 2026,
+      date: new Date('2026-04-05'),
       paperLink: 'https://arxiv.org/abs/2604.04174'
+    },
+    {
+      title: 'On the power of multipartite entanglement for pseudotelepathy',
+      authorships: [
+        { author: { display_name: 'Gilles Brassard' } },
+        { author: { display_name: 'Xavier Coiteux-Roy' } },
+        { author: { display_name: 'Rémi Ligez' } }
+      ],
+      venue: 'arXiv',
+      year: 2026,
+      date: new Date('2026-03-18'),
+      paperLink: 'https://arxiv.org/abs/2603.17956'
     },
   ];
   /* ╚════════════════════════ END TEMP MANUAL PAPERS ════════════════════╝ */
@@ -349,7 +357,9 @@
         const venue  = (source && source.display_name) ? source.display_name
                      : (arxivUrl ? 'arXiv' : '');
 
-        papers.push({ title, authorships: work.authorships, venue, year, paperLink });
+        const date = work.publication_date ? new Date(work.publication_date) : new Date(0);
+
+        papers.push({ title, authorships: work.authorships, venue, year, date, paperLink });
       });
     }
 
@@ -368,9 +378,12 @@
 
     if (papers.length === 0) { showError(); return; }
 
-    /* [TEMP-MERGE] Prepends MANUAL_PAPERS. When removing the manual block above,
-       revert this line to:    allPapers = papers; */
-    allPapers = MANUAL_PAPERS.concat(papers);
+    /* [TEMP-MERGE] Merge MANUAL_PAPERS in and re-sort the whole list by date
+       (newest first) so each manual entry lands in its correct chronological
+       slot rather than being pinned to the top. When removing the manual block
+       above, revert these three lines to:    allPapers = papers; */
+    allPapers = papers.concat(MANUAL_PAPERS);
+    allPapers.sort(function (a, b) { return b.date - a.date; });
 
     renderPage(1);
 
